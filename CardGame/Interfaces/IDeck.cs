@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IProperties
+    internal interface IDeck
     {
-        string Name { get; }
-        string Description { get; }
     }
 }

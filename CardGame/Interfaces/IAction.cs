@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardGame
+namespace CardGame.Interfaces
 {
     internal interface IAction
     {
         string Description { get; }
+        void DoAction();
     }
 }

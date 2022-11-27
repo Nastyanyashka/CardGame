@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardGame.Interfaces
+namespace CardGame
 {
-    internal interface IProperties
+    internal class Account
     {
-        string Name { get; }
-        string Description { get; }
     }
 }
