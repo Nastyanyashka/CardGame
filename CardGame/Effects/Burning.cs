@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CardGame.Interfaces;
-namespace CardGame
+
+namespace CardGame.Effects
 {
-    internal class Effects:IEffects
+    internal class Burning
     {
-        
-        public Effects() { }
     }
 }

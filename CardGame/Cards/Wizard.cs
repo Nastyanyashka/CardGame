@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardGame.Interfaces
+namespace CardGame.Cards
 {
-    internal interface IProperties
-    {   
-        string Description { get; }
+    internal class Wizard
+    {
     }
 }

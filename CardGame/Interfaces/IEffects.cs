@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IEffects
+    internal interface IEffects:ICloneable
     {
-        string Name { get; }
-        string Description { get; }
-        public int Duration { get; set; }
-        public const int MaxDuration = 99;
+        List<MomentsOfEvents> moments { get; }
+        public Effect GetEffectMethod(MomentsOfEvents moment, ITakeMessage owner = null);
+        public Effect GetEffectMethod(IAction action = null);
+        public delegate void Effect(ISendMessage sender = null, IAction action = null, ITakeMessage owner = null);
     }
 }

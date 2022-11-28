@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IDeck
+    internal interface IDeck: IHaveProperties
     {
+        List<ICard> Cards { get; set; }
     }
 }

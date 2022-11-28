@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IProperties
-    {   
-        string Description { get; }
+    internal interface ITakeMessage
+    {
+        public void takeMessage(IMessage message);
     }
 }

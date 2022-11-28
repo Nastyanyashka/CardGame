@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IAction
+    internal interface IAction:ICloneable
     {
-        string Description { get; }
-        void DoAction();
+        public Action GetActionMethod(ITakeMessage recipient = null);
+        public delegate void Action(ISendMessage sender = null, ITakeMessage recipient = null, List<ITakeMessage> anotherRecipient = null);
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal class IHero_class
+    internal interface IHaveDeck
     {
+        List<IDeck> Decks { get; }
     }
 }
