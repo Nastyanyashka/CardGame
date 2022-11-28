@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using CardGame.Interfaces;
 namespace CardGame
 {
-    internal class CreatureCard: Card
+    internal abstract class CreatureCard: Card
     {
 
         public CreatureCard(List<IEffects> effects, List<IProperties> properties, List<IAction> actions)
@@ -22,11 +22,6 @@ namespace CardGame
             if(actions==null)
                 throw new ArgumentNullException(nameof(actions));
             this.actions = actions;
-        }
-
-        public override object Clone()
-        {
-            return new CreatureCard(this.Effects,this.Properties,this.Actions);
         }
 
     }

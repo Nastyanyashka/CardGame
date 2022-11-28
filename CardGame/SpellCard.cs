@@ -16,7 +16,6 @@ namespace CardGame
             this.actions = actions;
         }
 
-  
     }
     
 }

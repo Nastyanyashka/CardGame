@@ -8,10 +8,4 @@
     <AppDesignerFolder>InGameProperties</AppDesignerFolder>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Actions\" />
-    <Folder Include="Effects\" />
-    <Folder Include="Cards\" />
-  </ItemGroup>
-
 </Project>
