@@ -11,7 +11,7 @@ namespace CardGame.InGameProperties
     {
         int count;
         string description;
-        ManaPoints(int count, string description)
+        public ManaPoints(int count, string description)
         {
             if (count < 0 || count > 10) throw new ArgumentOutOfRangeException("count");
             this.description = description;

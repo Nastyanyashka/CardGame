@@ -11,22 +11,23 @@ namespace CardGame
     {
         IDeck deck;
         List<ICard> hand = new List<ICard>();
-        
+        ManaPoints manaPoints;
 
-        Player(IDeck deck, NameOfCard name,HealthPoints healthPoints, ManaPoints manaPoints)
+        public Player(IDeck deck) : base(null)
         { 
            
-            if(deck == null) throw new ArgumentNullException(nameof(deck));
-            if (healthPoints == null)   throw new ArgumentNullException(nameof(healthPoints));
-            if (manaPoints==null) throw new ArgumentNullException(nameof(manaPoints));
+            //if(deck == null) throw new ArgumentNullException(nameof(deck));
             actions = null;
             this.deck = deck;
-            
-            properties.Add(name);
-            properties.Add(healthPoints);
-            properties.Add(manaPoints);
+            healthPoints.Amount = 30;
+            manaPoints = new ManaPoints(0,"");
+            name.Name = "Player";
         }
 
+        
+        public ManaPoints ManaPoints { get { return manaPoints; }set
+            { manaPoints= value;}
+        }
 
         public List<ICard> Hand { get { return hand; } set
             {
@@ -39,7 +40,7 @@ namespace CardGame
 
         public override object Clone()
         {
-            return new Player(this.deck, (NameOfCard)properties[0], (HealthPoints)properties[1],(ManaPoints) properties[2]);
+            return new Player(this.deck);
         }
 
     }

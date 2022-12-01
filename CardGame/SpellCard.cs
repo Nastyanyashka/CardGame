@@ -9,7 +9,7 @@ namespace CardGame
     internal abstract class SpellCard : Card
     {
 
-        protected SpellCard(List<IAction> actions)
+        protected SpellCard(IPlayer owner,List<IAction> actions):base(owner)
         {
             if (actions == null)
                 throw new ArgumentNullException(nameof(actions));

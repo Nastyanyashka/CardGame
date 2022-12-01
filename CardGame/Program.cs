@@ -3,13 +3,17 @@ using CardGame.Cards;
 using CardGame.Interfaces;
 using CardGame;
 
+
+
+
+
+
+
 GameManager game = GameManager.game;
-IPlayer p1 = new Player(10, 10, 20, null);
-p1.Properties.Add("Name", "p1");
-p1.Hand.Add(new Ogr(p1, 5));
-IPlayer p2 = new Player(10, 10, 20, null);
-p2.Properties.Add("Name", "p2");
-p2.Hand.Add(new Wizard(p2, 1));
+IPlayer p1 = new Player(null);
+p1.Hand.Add(new Ogr(p1));
+IPlayer p2 = new Player(null);
+p2.Hand.Add(new Wizard(p2));
 game.players.Add(p2);
 game.players.Add(p1);
 
@@ -20,13 +24,13 @@ while (game.CheckToWin() == null)
     game.MakeMove();
     Console.WriteLine("\n");
 }
-Console.WriteLine("Победил: " + game.CheckToWin().Properties["Name"]);
+Console.WriteLine("Победил: " + ((Player)game.CheckToWin()).Name);
         
 static void printData()
 {
     GameManager game = GameManager.game;
-    List<IHaveProperties> objs = new List<IHaveProperties>(game.players);
-    objs.AddRange(new List<IHaveProperties>(game.cardInGame));
-    foreach (IHaveProperties obj in objs)
-        Console.WriteLine(obj.Properties["Name"] + " - " + ((IHaveProperties)obj).healthPoint);
+    List<IHaveBasicProperties> objs = new List<IHaveBasicProperties>(game.players);
+    objs.AddRange(new List<IHaveBasicProperties>(game.cardInGame));
+    foreach (IHaveBasicProperties obj in objs)
+        Console.WriteLine(obj.Name + " - " + ((IHaveBasicProperties)obj).HealthPoints.Amount);
 }

@@ -10,7 +10,6 @@ namespace CardGame.Interfaces
     {
         List<MomentsOfEvents> moments { get; }
         public Effect GetEffectMethod(MomentsOfEvents moment, ITakeMessage owner = null);
-        public Effect GetEffectMethod(IAction action = null);
         public delegate void Effect(ISendMessage sender = null, IAction action = null, ITakeMessage owner = null);
     }
 }

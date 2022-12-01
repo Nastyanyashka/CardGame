@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CardGame.InGameProperties
 {
-    internal class NameOfCard: IProperties
+    internal class Timer:IProperties
     {
         string description;
-        string name;
-        public NameOfCard(string name, string description)
+        int amountOfMoves;
+        public Timer( int amountOfMoves, string description)
         {
             this.description = description;
-            this.name = name;
+            this.amountOfMoves = amountOfMoves;
         }
 
         public string Description { get { return description; } }
-        public string Name { get { return name; } set { name = value; } }
+        public int AmountOfMoves { get { return amountOfMoves; }  set { amountOfMoves = value; } }
     }
 }

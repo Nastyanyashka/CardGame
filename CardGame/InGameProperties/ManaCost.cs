@@ -10,13 +10,13 @@ namespace CardGame.InGameProperties
     {
         string description;
         int cost;
-        ManaCost(int cost, string description)
+        public ManaCost(int cost, string description)
         {
             this.description = description;
             this.cost = cost;
         }
 
         public string Description { get { return description; } }
-        public int Cost { get { return cost; } }
+        public int Cost { get { return cost; } set { cost = value; } }
     }
 }

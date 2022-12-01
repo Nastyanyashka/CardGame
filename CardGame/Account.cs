@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CardGame.Interfaces;
 namespace CardGame
 {
-    class Account:IHaveDeck,IHaveProperties
+    class Account:IHaveDeck
     {
         List<ICard> cards;
         List<IDeck> decks = new List<IDeck>();
