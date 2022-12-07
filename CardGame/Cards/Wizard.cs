@@ -10,9 +10,9 @@ namespace CardGame.Cards
 {
     internal class Wizard:Card
     {
-        public Wizard(IPlayer player):base(player)
+        public Wizard(/*IPlayer player*/)/*:base(player)*/
         {
-            owner = player;
+            owner = null;
             actions.Add(new Actions.ThrowFireBall(2));
             manaCost.Cost = 0;
             healthPoints.Amount = 8;
@@ -21,7 +21,7 @@ namespace CardGame.Cards
         }
         public override object Clone()
         {
-            return new Wizard(owner);
+            return new Wizard(/*owner*/);
         }
     }
 }

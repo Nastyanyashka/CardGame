@@ -9,7 +9,7 @@ namespace CardGame
     internal abstract class SpellCard : Card
     {
 
-        protected SpellCard(IPlayer owner):base(owner)
+        protected SpellCard(/*IPlayer owner*/)/*:base(owner)*/
         {
         }
 

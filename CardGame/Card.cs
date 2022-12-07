@@ -22,9 +22,9 @@ namespace CardGame
 
         protected List<IAction> actions = new List<IAction>();
         protected List<IEffects> effects = new List<IEffects>();
-        protected Card(IPlayer owner)
+        protected Card()
         {
-            this.owner = owner;
+            this.owner = null;
             healthPoints = new HealthPoints(0, "");
             manaCost = new ManaCost(0, "");
             damage = new AttackDamage(0, "");

@@ -9,6 +9,7 @@ namespace CardGame
 {
     internal class GameManager
     {
+        Random rand = new Random();
         private static GameManager? _game;
         public static GameManager game
         {
@@ -22,16 +23,67 @@ namespace CardGame
         private GameManager()
         {
             players = new List<Interfaces.IPlayer>();
-            cardInGame = new List<Interfaces.ICard>();
+            
+            cardsInGame = new List<Interfaces.ICard>();
             cemetery = new List<Interfaces.ICard>();
             currentPlayer = null!;
         }
-        public List<Interfaces.IPlayer> players;
-        public List<Interfaces.ICard> cardInGame;
-        public List<Interfaces.ICard> cemetery;
-        public Interfaces.IPlayer currentPlayer;
+        private List<Interfaces.IPlayer> players;
+        public List<IPlayer> Players { get {return players; } 
+            set 
+            {if (value == null)
+                throw new ArgumentNullException("");
+                players = value; 
+            } 
+        }
+        private List<Interfaces.ICard> cardsInGame;
+        public List<ICard> CardsInGame
+        {
+            get { return cardsInGame; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("");
+                cardsInGame = value;
+            }
+        }
+        private List<Interfaces.ICard> cemetery;
+        public List<ICard> Cemetery
+        {
+            get { return cemetery; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("");
+                cemetery = value;
+            }
+        }
+        private Interfaces.IPlayer currentPlayer;
+        public IPlayer CurrentPlayer
+        {
+            get { return currentPlayer; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("");
+                currentPlayer = value;
+            }
+        }
+
+        private int checker = 0;
         public void NextPlayer()
         {
+            if (checker == 0)
+            {
+                checker = 1;
+                for (int j = 0; j < players.Count; j++)
+                {
+                    for (int i = 0; i < players[j].Deck.Cards.Count; i++)
+                    {
+                        players[j].Deck.Cards[i].Owner = players[j];
+                    }
+                }
+            }
             if (currentPlayer == null && players.Count > 0)
                 currentPlayer = players[0];
             else
@@ -47,12 +99,12 @@ namespace CardGame
         }
         public void EnterCardInGame(Interfaces.ICard card)
         {
-            cardInGame.Add(card);
+            cardsInGame.Add(card);
             ApplyEffectsByMoment(card, null!, MomentsOfEvents.EnterTheGame);
         }
         public void ExitCardFromGame(Interfaces.ICard card)
         {
-            cardInGame.Remove(card);
+            cardsInGame.Remove(card);
             ApplyEffectsByMoment(card, null!, MomentsOfEvents.ExitTheGame);
             cemetery.Add(card);
         }
@@ -73,14 +125,21 @@ namespace CardGame
         private void ApplyEffectsByMoment(Interfaces.ISendMessage initiator, Interfaces.IAction action, MomentsOfEvents moment)
         {
             List<Interfaces.IHaveEffects> effectsOwner = new List<Interfaces.IHaveEffects>(players);
-            effectsOwner.AddRange(cardInGame);
+            effectsOwner.AddRange(cardsInGame);
             foreach (Interfaces.IHaveEffects owner in effectsOwner)
                 foreach (Interfaces.IEffects effect in owner.Effects.Where(e => e.moments.Contains(moment)))
                     effect.GetEffectMethod(moment, (ITakeMessage)owner)(initiator, action, (Interfaces.ITakeMessage)owner);
         }
         public void MakeMove()
         {
+            
             ApplyEffectsByMoment(null!, null!,MomentsOfEvents.BeforeMove);
+            if (currentPlayer.Deck.Cards.Count > 0)
+            {
+                ICard tmp = currentPlayer.Deck.Cards[rand.Next(0, currentPlayer.Deck.Cards.Count)];
+                currentPlayer.Hand.Add(tmp);
+                currentPlayer.Deck.Cards.Remove(tmp);
+            }
             int i = 0;
             Interfaces.ICard selectedCard;
             List<Interfaces.ITakeMessage> enemyCards = new List<Interfaces.ITakeMessage>();
@@ -98,9 +157,9 @@ namespace CardGame
                 }
             }
 
-            List<Interfaces.ICard> playerCards = new List<Interfaces.ICard>(cardInGame.Where(c => c.Owner == currentPlayer));
+            List<Interfaces.ICard> playerCards = new List<Interfaces.ICard>(cardsInGame.Where(c => c.Owner == currentPlayer));
 
-            if (cardInGame.Count(c => c.Owner == currentPlayer) != 0)
+            if (cardsInGame.Count(c => c.Owner == currentPlayer) != 0)
             {
                 Console.WriteLine("Выбери кем атаковать");
                 i = 0;
@@ -111,7 +170,7 @@ namespace CardGame
 
 
                 enemyCards = new List<Interfaces.ITakeMessage>(players.Where(p => p != currentPlayer));
-                enemyCards.AddRange(new List<Interfaces.ITakeMessage>(cardInGame.Where(c => c.Owner != currentPlayer)));
+                enemyCards.AddRange(new List<Interfaces.ITakeMessage>(cardsInGame.Where(c => c.Owner != currentPlayer)));
                 if (enemyCards.Count != 0)
                 {
                     Console.WriteLine("Выбери кого атаковать");
