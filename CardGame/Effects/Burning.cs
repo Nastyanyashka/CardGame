@@ -21,24 +21,28 @@ namespace CardGame.Effects
             _moments = new List<MomentsOfEvents>();
             _moments.Add(MomentsOfEvents.AfterMove);
         }
-        public IEffects.Effect GetEffectMethod(MomentsOfEvents moment, Interfaces.ITakeMessage owner = null)
+        public IEffects.Effect GetEffectMethod(MomentsOfEvents moment, Interfaces.ITakeMessage owner)
         {
             IEffects.Effect effect;
             if (moment == MomentsOfEvents.AfterMove)
                 effect = ToBurning;
             else
-                effect = null;
+                effect = null!;
             return effect;
         }
         public object Clone()
         {
             return new Burning(timer.AmountOfMoves);
         }
-        private void ToBurning(Interfaces.ISendMessage sender = null, Interfaces.IAction action = null, Interfaces.ITakeMessage owner = null)
+        private void ToBurning(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
         {
             if (owner is IHaveBasicProperties && timer.AmountOfMoves > 0)
-                ((IHaveBasicProperties)owner).HealthPoints.Amount -= damage.Amount;
+                ((IHaveBasicProperties)owner).HealthPoints -= damage.Amount;
+            if (((IHaveBasicProperties)owner).HealthPoints < 1 && (owner is IPlayer) == false)
+                GameManager.game.ExitCardFromGame((ICard)owner);
             timer.AmountOfMoves -= 1;
         }
+        public int AmountOfMoves
+        { get { return timer.AmountOfMoves;} set { timer.AmountOfMoves = value; } }
     }
 }

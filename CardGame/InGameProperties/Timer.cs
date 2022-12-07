@@ -14,6 +14,7 @@ namespace CardGame.InGameProperties
         public Timer( int amountOfMoves, string description)
         {
             this.description = description;
+            if (amountOfMoves < 1) throw new ArgumentException("AmountOfMoves of Effects/Actions can't be < 1");
             this.amountOfMoves = amountOfMoves;
         }
 

@@ -33,7 +33,7 @@ namespace CardGame
         public  List<IAction> Actions { get { return actions; } }
         public IPlayer Owner { get { return owner; } set
             {
-                if(value == null) throw new ArgumentNullException("");
+                if(value == null) throw new ArgumentNullException("Owner Can't be null");
                 owner = value;
             } }
         public  List<IEffects> Effects
@@ -41,10 +41,10 @@ namespace CardGame
             get { return effects; }
         }
 
-        public HealthPoints HealthPoints { get { return healthPoints; } set { healthPoints= value; } }
-        public ManaCost ManaCost { get { return manaCost; } set { manaCost= value; } }
+        public int HealthPoints { get { return healthPoints.Amount; } set { healthPoints.Amount= value; } }
+        public int ManaCost { get { return manaCost.Cost; } set { manaCost.Cost= value; } }
 
-        public AttackDamage Damage { get { return damage; } set { damage = value; } }
+        public int Damage { get { return damage.Amount; } set { damage.Amount = value; } }
 
         public string Name { get { return name.Name; } }
 

@@ -13,7 +13,7 @@ namespace CardGame.Cards
         public Wizard(IPlayer player):base(player)
         {
             owner = player;
-            actions.Add(new Actions.ThrowFireBall(new AttackDamage(2,"")));
+            actions.Add(new Actions.ThrowFireBall(2));
             manaCost.Cost = 0;
             healthPoints.Amount = 8;
             damage.Amount = 3;

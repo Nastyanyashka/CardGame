@@ -8,19 +8,19 @@ namespace CardGame
 {
     class Account:IHaveDeck
     {
+        string name;
         List<ICard> cards;
         List<IDeck> decks = new List<IDeck>();
-        Account(List<ICard> cards, List<IDeck> decks)
+        Account(string name)
         {
-            this.cards = cards;
-            this.decks = decks;
+            this.name = name;
+            cards= new List<ICard>();
+            decks = new List<IDeck>();
         }
 
 
 
-        public List<IDeck> Decks => throw new NotImplementedException();
-
-        public List<IProperties> Properties => throw new NotImplementedException();
+        public List<IDeck> Decks { get { return decks; } set { decks = value; } }
 
 
 

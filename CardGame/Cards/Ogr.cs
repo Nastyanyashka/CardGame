@@ -15,7 +15,7 @@ namespace CardGame.Cards
         public Ogr(IPlayer player) : base(player)
         {
             owner = player;
-            actions.Add(new Actions.Hit(new AttackDamage(4, "")));
+            actions.Add(new Actions.Hit(4));
             manaCost.Cost = 0;
             healthPoints.Amount = 8;
             damage.Amount = 3;

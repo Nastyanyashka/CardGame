@@ -11,27 +11,30 @@ namespace CardGame.Actions
     internal class Hit : IAction
     {
         AttackDamage damage;
-        public Hit(AttackDamage damage)
+        public Hit(int damage)
         {
-            this.damage = damage;
+            if (damage < 0) throw new ArgumentException("damage can't be negative");
+            this.damage = new AttackDamage(damage,"");
         }
         public object Clone()
         {
-            return new Hit(damage);
+            return new Hit(damage.Amount);
         }
-        public Interfaces.IAction.Action GetActionMethod(Interfaces.ITakeMessage recipient = null)
+        public Interfaces.IAction.Action GetActionMethod(Interfaces.ITakeMessage recipient)
         {
             if (recipient != null)
                 return new IAction.Action(ToHit);
             else
-                return null;
+                return null!;
         }
-        private void ToHit(Interfaces.ISendMessage sender = null, Interfaces.ITakeMessage recipient = null, List<Interfaces.ITakeMessage> anotherRecipient = null)
+        private void ToHit(Interfaces.ISendMessage sender, Interfaces.ITakeMessage recipient, List<Interfaces.ITakeMessage> anotherRecipient)
         {
             if (recipient is IHaveBasicProperties)
-                ((IHaveBasicProperties)recipient).HealthPoints.Amount -= damage.Amount;
-                    
-           
+            {
+                ((IHaveBasicProperties)recipient).HealthPoints -= damage.Amount;
+                if(((IHaveBasicProperties)recipient).HealthPoints < 1 && (recipient is IPlayer)== false)
+                    GameManager.game.ExitCardFromGame((ICard)recipient);
+            }
         }
     }
 }

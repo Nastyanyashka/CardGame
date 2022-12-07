@@ -13,11 +13,11 @@ namespace CardGame
         List<ICard> hand = new List<ICard>();
         ManaPoints manaPoints;
 
-        public Player(IDeck deck) : base(null)
+        public Player(IDeck deck) : base(null!)
         { 
            
             //if(deck == null) throw new ArgumentNullException(nameof(deck));
-            actions = null;
+            actions = null!;
             this.deck = deck;
             healthPoints.Amount = 30;
             manaPoints = new ManaPoints(0,"");
@@ -25,13 +25,13 @@ namespace CardGame
         }
 
         
-        public ManaPoints ManaPoints { get { return manaPoints; }set
-            { manaPoints= value;}
+        public int ManaPoints { get { return manaPoints.Count; }set
+            { manaPoints.Count= value;}
         }
 
         public List<ICard> Hand { get { return hand; } set
             {
-                if(value == null) throw new ArgumentNullException(nameof(value));
+                if(value == null) throw new ArgumentNullException("Hand can't be null");
                 hand = value;
             } }
 

@@ -2,12 +2,7 @@
 using CardGame.Cards;
 using CardGame.Interfaces;
 using CardGame;
-
-
-
-
-
-
+using CardGame.InGameProperties;
 
 GameManager game = GameManager.game;
 IPlayer p1 = new Player(null);
@@ -32,5 +27,5 @@ static void printData()
     List<IHaveBasicProperties> objs = new List<IHaveBasicProperties>(game.players);
     objs.AddRange(new List<IHaveBasicProperties>(game.cardInGame));
     foreach (IHaveBasicProperties obj in objs)
-        Console.WriteLine(obj.Name + " - " + ((IHaveBasicProperties)obj).HealthPoints.Amount);
+        Console.WriteLine(obj.Name + " - " + ((IHaveBasicProperties)obj).HealthPoints); 
 }

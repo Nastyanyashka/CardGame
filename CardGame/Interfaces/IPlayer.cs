@@ -12,6 +12,6 @@ namespace CardGame.Interfaces
         public IDeck Deck { get; }
         public List<ICard> Hand { get; set; }
 
-        public ManaPoints ManaPoints { get; set; }
+        public int ManaPoints { get; set; }
     }
 }
