@@ -12,7 +12,7 @@ namespace CardGame.Cards
 {
     internal class Ogr:Card
     {
-        public Ogr(/*IPlayer player*/) /*: base(player)*/
+        public Ogr()
         {
             owner = null;
             actions.Add(new Actions.Hit(4));
@@ -23,7 +23,7 @@ namespace CardGame.Cards
         }
         public override object Clone()
         {
-            return new Ogr(/*owner*/);
+            return new Ogr();
         }
     }
 }

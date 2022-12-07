@@ -13,7 +13,7 @@ namespace CardGame
         List<ICard> hand = new List<ICard>();
         ManaPoints manaPoints;
 
-        public Player(IDeck deck) /*: base(null!)*/
+        public Player(IDeck deck)
         { 
            
             if(deck == null) throw new ArgumentNullException(nameof(deck));
