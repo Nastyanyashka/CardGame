@@ -124,7 +124,7 @@ namespace CardGame
                 currentPlayer.Deck.Cards.Remove(tmp);
             }
 
-            ApplyEffectsByMoment(null!, null!, MomentsOfEvents.BetweenMove);
+            ApplyEffectsByMoment(null!, null!, MomentsOfEvents.BeforeMove);
         }
         public void EnterCardInGame(Interfaces.ICard card)
         {
