@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace CardGame.Cards
 {
-    internal class Wizard:Card
+    public class Wizard:Card
     {
         public Wizard()
         {
-            owner = null;
-            actions.Add(new Actions.ThrowFireBall(2));
-            manaCost.Cost = 0;
-            healthPoints.Amount = 8;
-            damage.Amount = 3;
+            owner = null!;
+            damage.Amount = 2;
+            actions.Add(new Actions.ThrowFireBall(damage.Amount,3));
+            manaCost.Cost = 2;
+            healthPoints.Amount = 4;
             name.Name = "Wizzard";
         }
         public override object Clone()

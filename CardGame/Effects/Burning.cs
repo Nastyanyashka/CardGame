@@ -3,20 +3,21 @@ using CardGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CardGame.Effects
 {
-    internal class Burning:IEffects
+    public class Burning:IEffects
     {
         List<MomentsOfEvents> _moments;
         AttackDamage damage;
         CardGame.InGameProperties.Timer timer;
         public List<MomentsOfEvents> moments { get => _moments; }
-        public Burning(int amountOfMoves)
+        public Burning(int amountOfMoves, int damage)
         {
-            damage = new AttackDamage(1, "");
+            this.damage = new AttackDamage(damage, "");
             timer = new InGameProperties.Timer(amountOfMoves, "");   
             _moments = new List<MomentsOfEvents>();
             _moments.Add(MomentsOfEvents.AfterMove);
@@ -32,7 +33,7 @@ namespace CardGame.Effects
         }
         public object Clone()
         {
-            return new Burning(timer.AmountOfMoves);
+            return new Burning(timer.AmountOfMoves, damage.Amount);
         }
         private void ToBurning(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
         {

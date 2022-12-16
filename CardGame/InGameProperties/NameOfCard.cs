@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.InGameProperties
 {
-    internal class NameOfCard: IProperties
+    public class NameOfCard: IProperties
     {
         string description;
         string name;

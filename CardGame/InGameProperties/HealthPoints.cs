@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.InGameProperties
 {
-    internal class HealthPoints : IProperties
+    public class HealthPoints : IProperties
     {
         string description;
         int amount;

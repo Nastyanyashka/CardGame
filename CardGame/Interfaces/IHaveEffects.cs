@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IHaveEffects
+    public interface IHaveEffects
     {
         List<IEffects> Effects { get; }
     }

@@ -9,17 +9,36 @@ using System.Threading.Tasks;
 
 namespace CardGame.Actions
 {
-    internal class ThrowFireBall: IAction
+    public class ThrowFireBall: IAction,IHaveAttackDamage
     {
         AttackDamage damage;
-        public ThrowFireBall(int damage)
+
+        CardGame.InGameProperties.Timer timer;
+        List<TypeOfActions> typeOfActions = new List<TypeOfActions>() { TypeOfActions.AttackAction };
+        public ThrowFireBall(int damage,int amountOfMoves)
         {
             if (damage < 0) throw new ArgumentException("damage can't be negative");
-            this.damage = new AttackDamage(damage, "");         
+            this.damage = new AttackDamage( damage, "");
+            timer = new CardGame.InGameProperties.Timer(amountOfMoves, "");
         }
+
+        public List<TypeOfActions> Type { get { return typeOfActions; } }
+
+        public int Damage
+        {
+            get
+            {
+                return damage.Amount;
+            }
+            set
+            {
+                damage.Amount = value;
+            }
+        }
+
         public object Clone()
         {
-            return new ThrowFireBall(damage.Amount);
+            return new ThrowFireBall(damage.Amount, this.timer.AmountOfMoves);
         }
         public Interfaces.IAction.Action GetActionMethod(Interfaces.ITakeMessage recipient)
         {
@@ -43,7 +62,7 @@ namespace CardGame.Actions
                     return;
             }
             if (recipient is IHaveEffects)
-                ((IHaveEffects)recipient).Effects.Add(new Effects.Burning(3));
+                ((IHaveEffects)recipient).Effects.Add(new Effects.Burning(timer.AmountOfMoves, damage.Amount));
             if (((IHaveBasicProperties)recipient).HealthPoints < 1 && (recipient is IPlayer) == false)
                 GameManager.game.ExitCardFromGame((ICard)recipient);
         }

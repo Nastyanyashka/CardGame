@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CardGame.Interfaces;
 namespace CardGame
 {
-    class Account:IHaveDeck
+    internal class Account
     {
         string name;
         List<ICard> cards;
@@ -17,9 +17,6 @@ namespace CardGame
             cards= new List<ICard>();
             decks = new List<IDeck>();
         }
-
-
-
         public List<IDeck> Decks { get { return decks; } set { decks = value; } }
 
 

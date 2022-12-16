@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IMessage
+    public interface IMessage
     {
         ISendMessage Sender { get; }
         List<ITakeMessage> Receivers { get; }

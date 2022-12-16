@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.InGameProperties
 {
-    internal class AttackDamage: IProperties
+    public class AttackDamage: IProperties
     {
         string description;
         int amount;
@@ -19,6 +19,6 @@ namespace CardGame.InGameProperties
         }
 
         public string Description { get { return description; } }
-        public int Amount { get { return amount; }set { amount = value; } }
+        public  int Amount { get { return amount; } set { amount = value; } }
     }
 }

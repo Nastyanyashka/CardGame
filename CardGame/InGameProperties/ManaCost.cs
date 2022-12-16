@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CardGame.Interfaces;
 namespace CardGame.InGameProperties
 {
-    internal class ManaCost : IProperties
+    public class ManaCost : IProperties
     {
         string description;
         int cost;

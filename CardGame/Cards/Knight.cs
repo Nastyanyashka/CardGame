@@ -1,29 +1,30 @@
 ﻿using CardGame.InGameProperties;
-using CardGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static CardGame.Interfaces.IAction;
-using static CardGame.Interfaces.IEffects;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
+using CardGame.Interfaces;
 
 namespace CardGame.Cards
 {
-    public class Ogr:Card
+    public class Knight:Card
     {
-        public Ogr()
+        public Knight()
         {
             owner = null!;
-            damage.Amount = 2;
+            damage.Amount = 1;
+            actions.Add(new Actions.Inspirate(3));
             actions.Add(new Actions.Hit(damage.Amount));
             manaCost.Cost = 2;
-            healthPoints.Amount = 5;
-            name.Name = "Ogr";
+            healthPoints.Amount = 4;
+            name.Name = "Knight";
         }
         public override object Clone()
         {
-            return new Ogr();
+            return new Knight();
         }
     }
 }

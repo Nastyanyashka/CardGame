@@ -7,7 +7,7 @@ using CardGame.Interfaces;
 
 namespace CardGame.InGameProperties
 {
-    internal class ManaPoints : IProperties
+    public class ManaPoints : IProperties
     {
         int count;
         string description;

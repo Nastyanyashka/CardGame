@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace CardGame
 {
-    internal class Player : Card,IPlayer
+    public class Player : Card,IPlayer
     {
         IDeck deck;
         List<ICard> hand = new List<ICard>();

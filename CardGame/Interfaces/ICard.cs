@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface ICard:IHaveEffects,ISendMessage,ICloneable,ITakeMessage,IHaveBasicProperties
+    public interface ICard:IHaveEffects,ISendMessage,ICloneable,ITakeMessage,IHaveBasicProperties
     {
         public IPlayer Owner { get; set; }
         List<IAction> Actions { get; }

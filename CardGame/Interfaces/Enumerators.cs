@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CardGame
+namespace CardGame.Interfaces
 {
-    enum MomentsOfEvents
+    public enum MomentsOfEvents
     {
         BeforeMove = 0,
         InMove,
         AfterMove,
-        BetweenMove,
         ReceivingMessage,
         SendingMessage,
         EnterTheGame,
-        ExitTheGame
+        ExitTheGame,
+        EveryMoment
     }
 }

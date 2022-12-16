@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    public interface ITakeMessage
+    public enum TypeOfActions
     {
-        public void takeMessage(IMessage message);
+        BuffAction = 0,
+        AttackAction,
+        SpecialAction
     }
+    
 }

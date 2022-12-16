@@ -1,13 +1,15 @@
-﻿using System;
+﻿using CardGame.InGameProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IHaveDeck
+    public  interface IHaveAttackDamage
     {
-        List<IDeck> Decks { get; }
+        int Damage { get; set; }
     }
 }

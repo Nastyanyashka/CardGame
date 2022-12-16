@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.InGameProperties
 {
-    internal class Timer:IProperties
+    public class Timer:IProperties
     {
         string description;
         int amountOfMoves;

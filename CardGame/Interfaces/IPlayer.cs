@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IPlayer:ISendMessage,ITakeMessage,IHaveEffects,ICloneable,IHaveBasicProperties
+    public interface IPlayer:ISendMessage,ITakeMessage,IHaveEffects,ICloneable,IHaveBasicProperties
     {
         public IDeck Deck { get; }
         public List<ICard> Hand { get; set; }

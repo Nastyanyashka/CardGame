@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CardGame.Interfaces;
 namespace CardGame
 {
-    internal class Deck : IDeck
+    public class Deck : IDeck
     {
         List<ICard> cards;   
         public Deck(List<ICard> cards) {

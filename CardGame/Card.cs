@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using CardGame.InGameProperties;
@@ -11,7 +12,7 @@ using static CardGame.Interfaces.IEffects;
 
 namespace CardGame
 {
-    internal abstract class Card:ICard
+    public abstract class Card:ICard,IHaveAttackDamage
     {
         protected IPlayer owner;
         protected HealthPoints healthPoints;
@@ -19,12 +20,11 @@ namespace CardGame
         protected ManaCost manaCost;
         protected NameOfCard name;
 
-
         protected List<IAction> actions = new List<IAction>();
         protected List<IEffects> effects = new List<IEffects>();
         protected Card()
         {
-            this.owner = null;
+            this.owner = null!;
             healthPoints = new HealthPoints(0, "");
             manaCost = new ManaCost(0, "");
             damage = new AttackDamage(0, "");
@@ -44,7 +44,16 @@ namespace CardGame
         public int HealthPoints { get { return healthPoints.Amount; } set { healthPoints.Amount= value; } }
         public int ManaCost { get { return manaCost.Cost; } set { manaCost.Cost= value; } }
 
-        public int Damage { get { return damage.Amount; } set { damage.Amount = value; } }
+        public int Damage { get { return damage.Amount; } 
+            set { 
+                foreach(IAction action in actions)
+                {
+                    if(action is IHaveAttackDamage)
+                    {
+                        ((IHaveAttackDamage)action).Damage= value;
+                    }
+                }
+                damage.Amount = value; } }
 
         public string Name { get { return name.Name; } }
 

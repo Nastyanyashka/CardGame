@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    internal interface IEffects:ICloneable
+    public interface IEffects:ICloneable
     {
         List<MomentsOfEvents> moments { get; }
         public Effect GetEffectMethod(MomentsOfEvents moment, ITakeMessage owner);

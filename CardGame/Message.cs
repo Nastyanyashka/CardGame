@@ -8,7 +8,7 @@ using CardGame.Interfaces;
 
 namespace CardGame
 {
-    internal class Message:IMessage
+    public class Message:IMessage
     {
         ISendMessage sender;
         List<ITakeMessage> receivers;
