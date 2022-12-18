@@ -10,7 +10,7 @@ using static CardGame.Interfaces.IEffects;
 
 namespace CardGame.Cards
 {
-    public class Ogr:Card
+    public class Ogr:CreatureCard
     {
         public Ogr()
         {
@@ -24,6 +24,11 @@ namespace CardGame.Cards
         public override object Clone()
         {
             return new Ogr();
+        }
+
+        public override List<IMessage> createMessage()
+        {
+            return new List<IMessage>() { new Message(this, actions[0]) };
         }
     }
 }

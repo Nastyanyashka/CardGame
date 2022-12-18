@@ -1,5 +1,7 @@
-﻿using CardGame.InGameProperties;
+﻿using CardGame.Actions;
+using CardGame.InGameProperties;
 using CardGame.Interfaces;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +10,18 @@ using System.Threading.Tasks;
 
 namespace CardGame.Cards
 {
-    public class Wizard:CreatureCard
+    public class IceBolt : Card
     {
-        public Wizard()
-        {
+        public IceBolt() {
             owner = null!;
-            damage.Amount = 2;
-            actions.Add(new Actions.ThrowFireBall(damage.Amount,3));
-            manaCost.Cost = 2;
-            healthPoints.Amount = 4;
-            name.Name = "Wizzard";
+            damage.Amount = 3;
+            actions.Add(new FreezeWithDamage(damage.Amount,3));
+            manaCost.Cost = 3;
+            name.Name = "Ice Bolt";
         }
         public override object Clone()
         {
-            return new Wizard();
+            return new IceBolt();
         }
 
         public override List<IMessage> createMessage()

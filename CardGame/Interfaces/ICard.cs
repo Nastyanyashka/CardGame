@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    public interface ICard:IHaveEffects,ISendMessage,ICloneable,ITakeMessage,IHaveBasicProperties
+    public interface ICard:IHaveEffects,ISendMessage,ICloneable,ITakeMessage,IHaveBasicProperties, IHaveAttackDamage, IHaveManaCost,IHaveState
     {
         public IPlayer Owner { get; set; }
         List<IAction> Actions { get; }
-        public IMessage createMessage();
-        public void intoTheGame();
-        public void exitTheGame();
+        public List<IMessage> createMessage();
     }
 }

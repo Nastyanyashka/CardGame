@@ -12,19 +12,19 @@ namespace CardGame
         IDeck deck;
         List<ICard> hand = new List<ICard>();
         ManaPoints manaPoints;
-
-        public Player(IDeck deck)
+        HealthPoints healthPoints;
+        public Player(IDeck deck,string name)
         { 
            
             if(deck == null) throw new ArgumentNullException(nameof(deck));
-            actions = null!;
+            actions = new List<IAction>();
             this.deck = deck;
-            healthPoints.Amount = 30;
+            healthPoints = new HealthPoints(30,"");
             manaPoints = new ManaPoints(0,"");
-            name.Name = "Player";
+            this.name.Name = name;
         }
 
-        
+        public int HealthPoints { get { return healthPoints.Amount; } set { healthPoints.Amount = value; } }
         public int ManaPoints { get { return manaPoints.Count; }set
             { manaPoints.Count= value;}
         }
@@ -40,8 +40,17 @@ namespace CardGame
 
         public override object Clone()
         {
-            return new Player(this.deck);
+            return new Player(this.deck,this.name.Name);
         }
 
+        public override List<IMessage> createMessage()
+        {
+            List<IMessage> msgs = new List<IMessage>();
+            for(int i =0; i<actions.Count;i++)
+            {
+                msgs.Add(new Message(this, actions[i]));
+            }
+            return msgs;
+        }
     }
 }

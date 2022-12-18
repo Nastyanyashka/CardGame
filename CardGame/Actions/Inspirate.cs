@@ -12,7 +12,6 @@ namespace CardGame.Actions
     public class Inspirate : IAction
     {
         int amountOfMoves;
-        List<TypeOfActions> typeOfActions = new List<TypeOfActions>(){TypeOfActions.BuffAction};
 
         public Inspirate(int amountOfMoves)
         {
@@ -20,7 +19,6 @@ namespace CardGame.Actions
             this.amountOfMoves = amountOfMoves;
         }
 
-        public List<TypeOfActions> Type { get { return typeOfActions; } }
 
         public object Clone()
         {

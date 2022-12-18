@@ -8,18 +8,16 @@ using System.Threading.Tasks;
 
 namespace CardGame.Effects
 {
-    public class Inspiration: IEffects
+    public class Frozen : IEffects
     {
         List<MomentsOfEvents> _moments;
         CardGame.InGameProperties.Timer timer;
-        bool checker = false;
-       
-        public Inspiration(int amountOfMoves)
+        public Frozen(int amountOfMoves) 
         {
             timer = new InGameProperties.Timer(amountOfMoves, "");
             _moments = new List<MomentsOfEvents>();
-            _moments.Add(MomentsOfEvents.EnterTheGame);
             _moments.Add(MomentsOfEvents.BeforeMove);
+            _moments.Add(MomentsOfEvents.EnterTheGame);
         }
         public List<MomentsOfEvents> moments { get => _moments; }
         public int AmountOfMoves
@@ -27,38 +25,36 @@ namespace CardGame.Effects
         public IEffects.Effect GetEffectMethod(MomentsOfEvents moment, Interfaces.ITakeMessage owner)
         {
             IEffects.Effect effect;
-            if (moment == MomentsOfEvents.EnterTheGame && checker == false)
-            {
-                effect = ToInspirate;
-                checker= true;
-            }
+            if (moment == MomentsOfEvents.EnterTheGame)
+                effect = ToFreeze;
             else if (moment == MomentsOfEvents.BeforeMove)
-                effect = ToInspirateBeforeMove;
+                effect = ToFreezeBeforeMove;
             else
                 effect = null!;
             return effect;
         }
         public object Clone()
         {
-            return new Inspiration(timer.AmountOfMoves);
+            return new Frozen(timer.AmountOfMoves);
         }
-        private void ToInspirate(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
+        private void ToFreeze(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
         {
-            if (owner is IHaveHealthPoints&& owner is IHaveAttackDamage && timer.AmountOfMoves > 0)
+            if (owner is ICard)
             {
-                ((IHaveHealthPoints)owner).HealthPoints++;
-                ((IHaveAttackDamage)owner).Damage++;
+                ((ICard)owner).State = States.Deactivated;
             }
+            if (((IHaveHealthPoints)owner).HealthPoints < 1 && (owner is IPlayer) == false)
+                GameManager.Game.ExitCardFromGame((ICard)owner);
         }
-        private void ToInspirateBeforeMove(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
+        private void ToFreezeBeforeMove(Interfaces.ISendMessage sender, Interfaces.IAction action, Interfaces.ITakeMessage owner)
         {
             timer.AmountOfMoves--;
-            if(timer.AmountOfMoves == 0)
+            if (timer.AmountOfMoves == 0)
             {
-                ((IHaveHealthPoints)owner).HealthPoints--;
-                ((IHaveAttackDamage)owner).Damage--;
+                ((ICard)owner).State = States.Activated;
+                ((ICard)owner).Effects.Remove(this);
             }
         }
-        
+
     }
 }

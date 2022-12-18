@@ -10,6 +10,6 @@ namespace CardGame.Interfaces
 {
     public  interface IHaveAttackDamage
     {
-        int Damage { get; set; }
+        public int Damage { get; set; }
     }
 }

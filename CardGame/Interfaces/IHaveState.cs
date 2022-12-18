@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    public interface IMessage
+    public interface IHaveState
     {
-        ISendMessage Sender { get; }
-        List<ITakeMessage> Receivers { get; }
-        IAction Actions { get; }
+        States State { get; set; }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    public interface IMessage
+    public interface ICreatureCard
     {
-        ISendMessage Sender { get; }
-        List<ITakeMessage> Receivers { get; }
-        IAction Actions { get; }
+        public void intoTheGame();
+        public void exitTheGame();
     }
 }

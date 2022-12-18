@@ -11,14 +11,12 @@ namespace CardGame.Actions
     public class Hit : IAction,IHaveAttackDamage
     {
         AttackDamage damage;
-        List<TypeOfActions> typeOfActions = new List<TypeOfActions>() { TypeOfActions.AttackAction };
         public Hit(int damage)
         {
             if (damage < 0) throw new ArgumentException("damage can't be negative");
             this.damage = new AttackDamage(damage,"");
         }
 
-        public List<TypeOfActions> Type { get { return typeOfActions; } }
 
         public object Clone()
         {
@@ -33,11 +31,11 @@ namespace CardGame.Actions
         }
         private void ToHit(Interfaces.ISendMessage sender, Interfaces.ITakeMessage recipient, List<Interfaces.ITakeMessage> anotherRecipient)
         {
-            if (recipient is IHaveBasicProperties)
+            if (recipient is IHaveHealthPoints)
             {
-                ((IHaveBasicProperties)recipient).HealthPoints -= damage.Amount;
-                if(((IHaveBasicProperties)recipient).HealthPoints < 1 && (recipient is IPlayer)== false)
-                    GameManager.game.ExitCardFromGame((ICard)recipient);
+                ((IHaveHealthPoints)recipient).HealthPoints -= damage.Amount;
+                if(((IHaveHealthPoints)recipient).HealthPoints < 1 && (recipient is IPlayer)== false)
+                    GameManager.Game.ExitCardFromGame((ICard)recipient);
             }
         }
         public int Damage { get { 

@@ -12,15 +12,15 @@ namespace CardGame
     {
         ISendMessage sender;
         List<ITakeMessage> receivers;
-        List<IAction> actions;
+        IAction actions;
 
-        public Message(Interfaces.ICard sender, List<Interfaces.IAction> actions)
+        public Message(Interfaces.ICard sender, IAction actions)
         {
             this.sender = sender;
             this.actions = actions;
             receivers = new List<Interfaces.ITakeMessage>();
         }
-        public Message(Interfaces.ICard sender, List<Interfaces.IAction> actions, List<Interfaces.ITakeMessage> receivers) : this(sender, actions)
+        public Message(Interfaces.ICard sender, IAction actions, List<Interfaces.ITakeMessage> receivers) : this(sender, actions)
         {
             this.receivers = receivers;
         }
@@ -34,7 +34,7 @@ namespace CardGame
             } 
         }
         public List<ITakeMessage> Receivers { get { return receivers; } set { receivers = value; } }
-        public List<IAction> Actions { get { return actions; } set { actions= value; } }
+        public IAction Actions { get { return actions; } set { actions= value; } }
 
     }
 }
