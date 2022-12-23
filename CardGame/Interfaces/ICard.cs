@@ -11,5 +11,6 @@ namespace CardGame.Interfaces
         public IPlayer Owner { get; set; }
         List<IAction> Actions { get; }
         public List<IMessage> createMessage();
+        public bool CanMakeMove { get; set; }
     }
 }

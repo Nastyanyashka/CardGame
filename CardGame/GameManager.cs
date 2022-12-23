@@ -34,7 +34,10 @@ namespace CardGame
         private List<Interfaces.ICard> cardsInGame;
         private List<Interfaces.ICard> cemetery;
         private Interfaces.IPlayer currentPlayer;
+        private ICard selectedCard;
         private bool checker = false;
+        
+        public ICard SelectedCard { get { return selectedCard; } set { selectedCard = value; } }
         public List<IPlayer> Players { get { return players; }
             set
             { if (value == null)
@@ -78,6 +81,7 @@ namespace CardGame
 
         public void NextPlayer()
         {
+            ApplyEffectsByMoment(null!, null!, MomentsOfEvents.AfterMove);
             if (checker == false)
             {
                 checker = true;
@@ -100,18 +104,25 @@ namespace CardGame
                 else
                     currentPlayer = players[indexPlayer];
             }
-            TakeCard();
-            //ApplyEffectsByMoment(null!, null!, MomentsOfEvents.BeforeMove);
+            foreach(ICard card in cardsInGame)
+            {
+                card.CanMakeMove = true;
+            }
+            currentPlayer.ManaPoints++;
+            currentPlayer.CurrentManaPoints = currentPlayer.ManaPoints;
+            ApplyEffectsByMoment(null!, null!, MomentsOfEvents.BeforeMove);
         }
 
-        public void TakeCard()
+        public ICard TakeCard()
         {
             if (currentPlayer.Deck.Cards.Count > 0)
             {
                 ICard tmp = currentPlayer.Deck.Cards[rand.Next(0, currentPlayer.Deck.Cards.Count)];
                 currentPlayer.Hand.Add(tmp);
                 currentPlayer.Deck.Cards.Remove(tmp);
+                return tmp;
             }
+            return null;
         }
         public void EnterCardInGame(Interfaces.ICard card)
         {
@@ -137,12 +148,12 @@ namespace CardGame
                 resipient.takeMessage(message);
             ApplyEffectsByMoment(message.Sender, null!, MomentsOfEvents.ReceivingMessage);
         }
-        public Interfaces.IPlayer CheckToWin()
+        public bool CheckToWin()
         {
             if (players.Count(p => p.HealthPoints > 0) > 1)
-                return null!;
+                return false;
             else
-                return players.Find(p => p.HealthPoints > 0)!;
+                return true;
         }
         private void ApplyEffectsByMoment(Interfaces.ISendMessage initiator, Interfaces.IAction action, MomentsOfEvents moment)
         {
@@ -199,11 +210,91 @@ namespace CardGame
             i = Convert.ToInt32(Console.ReadLine());
             return enemyCards[i];
         }
+        //public void MakeMove()
+        //{
+
+        //    Console.WriteLine($"\n Сейчас ходит {currentPlayer.Name}");
+        //    ApplyEffectsByMoment(null!, null!,MomentsOfEvents.BeforeMove);
+        //    ICard cardFromHand = ChooseCardFromHand();
+        //    ICard selectedCard;
+        //    ITakeMessage enemyCard;
+        //    List<Interfaces.IMessage> messages;
+        //    if (cardFromHand != null)
+        //    {
+        //        if (cardFromHand is ICreatureCard)
+        //        {
+        //            ((ICreatureCard)cardFromHand).intoTheGame();
+
+        //        }
+        //        else { currentPlayer.Hand.Remove(cardFromHand); }
+        //        if (cardsInGame.Count(c => (c.Owner == currentPlayer) && (c.State == States.Activated)) != 0 || (cardFromHand is not ICreatureCard))
+        //        {
+        //            if (cardFromHand is not ICreatureCard)
+        //            { selectedCard = cardFromHand; }
+
+        //            else { selectedCard = ChooseAttackingCard(); }
+        //            List<Interfaces.ITakeMessage> enemyCards = new List<Interfaces.ITakeMessage>();
+        //            enemyCards = new List<Interfaces.ITakeMessage>(players.Where(p => p != currentPlayer));
+        //            enemyCards.AddRange(new List<Interfaces.ITakeMessage>(cardsInGame.Where(c => c.Owner != currentPlayer)));
+        //            if (enemyCards.Count != 0)
+        //            {
+        //                enemyCard = ChooseAttackedCard(enemyCards);
+        //                messages = selectedCard.createMessage();
+        //                foreach (Interfaces.IMessage message in messages)
+        //                {
+        //                    message.Receivers.Add(enemyCard);
+        //                    if (selectedCard is not ICreatureCard)
+        //                    {
+        //                        ApplyEffectsByMoment(message.Sender, message.Actions, MomentsOfEvents.EnterTheGame);
+        //                    }
+        //                    else
+        //                    {
+        //                        ApplyEffectsByMoment(message.Sender, message.Actions, MomentsOfEvents.InMove);
+        //                    }
+        //                    SendMessage(message);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    ApplyEffectsByMoment(null!, null!, MomentsOfEvents.AfterMove);
+        //    NextPlayer();
+        //}
+        public void ThrowCardInGame(ICard cardFromHand)
+        {
+            if (cardFromHand is ICreatureCard)
+            {
+                ((ICreatureCard)cardFromHand).intoTheGame();
+
+            }
+            else { currentPlayer.Hand.Remove(cardFromHand);
+                currentPlayer.CurrentManaPoints -= cardFromHand.ManaCost;
+                /*MakeMove*/}
+        }
+        public void MakeMove(ICard selectedCard,ITakeMessage enemyCard)
+        {
+            List<Interfaces.IMessage> messages;
+                //if (cardsInGame.Count(c => (c.Owner == currentPlayer) && (c.State == States.Activated)) != 0 || (cardFromHand is not ICreatureCard))
+                        messages = selectedCard.createMessage();
+                        foreach (Interfaces.IMessage message in messages)
+                        {
+                            message.Receivers.Add(enemyCard);
+                            if (selectedCard is not ICreatureCard)
+                            {
+                                ApplyEffectsByMoment(message.Sender, message.Actions, MomentsOfEvents.EnterTheGame);
+                            }
+                            else
+                            {
+                                ApplyEffectsByMoment(message.Sender, message.Actions, MomentsOfEvents.InMove);
+                            }
+                            SendMessage(message);
+                    }
+            selectedCard.CanMakeMove = false;
+        }
         public void MakeMove()
         {
 
             Console.WriteLine($"\n Сейчас ходит {currentPlayer.Name}");
-            ApplyEffectsByMoment(null!, null!,MomentsOfEvents.BeforeMove);
+            ApplyEffectsByMoment(null!, null!, MomentsOfEvents.BeforeMove);
             ICard cardFromHand = ChooseCardFromHand();
             ICard selectedCard;
             ITakeMessage enemyCard;
@@ -249,4 +340,5 @@ namespace CardGame
             NextPlayer();
         }
     }  
+
 }

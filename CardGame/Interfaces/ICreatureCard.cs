@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CardGame.Interfaces
 {
-    public interface ICreatureCard
+    public interface ICreatureCard: IHaveHealthPoints
     {
         public void intoTheGame();
         public void exitTheGame();

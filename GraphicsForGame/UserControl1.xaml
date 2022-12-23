@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="GraphicsForGame.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GraphicsForGame"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid MouseDown="MouseDown123" Margin="0,0,10,10">
+        <!--<Image x:Name="NecoArc" Grid.Column="2" Grid.Row ="0" HorizontalAlignment="Stretch" Source="/Images/WhiteFrame.png" Stretch="Fill">
+        </Image>-->
+        <Label x:Name="HP" Content="" FontSize="15" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" Margin="0,32,0,0"/>
+        <Label x:Name ="Attack" Content="2" FontSize="15" Foreground="White" HorizontalAlignment="Left" Margin="29,32,0,0" VerticalAlignment="Top" Width="25" RenderTransformOrigin="-0.74,0.538"/>
+        <Label x:Name ="Name" Content="Label" Foreground="White" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</UserControl>

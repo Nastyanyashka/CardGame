@@ -44,7 +44,7 @@ namespace GraphicsForGame
                 Height = 42,
                 Width = 210,
                 Content = "Готово",
-                FontSize = 20,
+                FontSize = 20
             };
             DeckReady.Click += ReadyDeck_Button;
             Grid.SetColumn(DeckReady, 1);

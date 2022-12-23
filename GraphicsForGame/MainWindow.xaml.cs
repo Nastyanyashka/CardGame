@@ -33,9 +33,7 @@ namespace GraphicsForGame
 
         private void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            Game gameWindow = new Game();
-            AnotherGameManager game = AnotherGameManager.Game;
-            game.NextPlayer();
+            Game gameWindow = new Game();     
             this.Close();
             gameWindow.Show();
             

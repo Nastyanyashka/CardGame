@@ -13,5 +13,6 @@ namespace CardGame.Interfaces
         public List<ICard> Hand { get; set; }
 
         public int ManaPoints { get; set; }
+        public int CurrentManaPoints { get; set; }
     }
 }

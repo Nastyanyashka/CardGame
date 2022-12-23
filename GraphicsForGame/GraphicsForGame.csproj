@@ -8,7 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\blackline2.png" />
+    <None Remove="Images\NecoArc.jpg" />
+    <None Remove="Images\Sus.jpg" />
+    <None Remove="Images\WhiteFrame.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CardGame\CardGame.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\blackline2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\NecoArc.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Sus.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WhiteFrame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

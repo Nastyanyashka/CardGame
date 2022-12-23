@@ -15,7 +15,7 @@ namespace CardGame.Cards
             owner = null!;
             damage.Amount = 2;
             actions.Add(new Actions.ThrowFireBall(damage.Amount,3));
-            manaCost.Cost = 2;
+            manaCost.Cost = 1;
             healthPoints.Amount = 4;
             name.Name = "Wizzard";
         }

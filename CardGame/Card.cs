@@ -21,14 +21,20 @@ namespace CardGame
         protected List<IAction> actions = new List<IAction>();
         protected List<IEffects> effects = new List<IEffects>();
         protected States state;
+        protected bool canMakeMove;
         protected Card()
         {
+            
             this.owner = null!;
             manaCost = new ManaCost(0, "");
             damage = new AttackDamage(0, "");
             name = new NameOfCard("", "");
             this.state = States.Activated;
+            canMakeMove = true;
         }
+
+        public bool CanMakeMove { get { return canMakeMove; }  set { canMakeMove = value; } }
+
         public  List<IAction> Actions { get { return actions; } }
         public IPlayer Owner { get { return owner; } set
             {
@@ -76,5 +82,6 @@ namespace CardGame
 
         public abstract object Clone();
         public abstract List<IMessage> createMessage();
+
     }
 }
